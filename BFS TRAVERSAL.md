@@ -1,41 +1,77 @@
-# Experiment 11(b): BFS Traversal
+# Exp No: 17
+# Breadth First Search 
 
-## Aim
-To write a Python program to print the BFS (Breadth-First Search) traversal from a given source vertex in a graph.
+## AIM :
 
----
+To write a Python program to perform topological sorting of a Directed Acyclic Graph (DAG).
 
-## Algorithm
+## ALGORITHM :
 
-1. **Start the program**:
-   - Create a graph using an adjacency list representation.
-   - Add edges between vertices using the `addEdge()` function.
+Step 1 : Represent the graph using an adjacency list (dictionary or list of lists).
 
-2. **Implement the BFS function**:
-   - Initialize all vertices as not visited.
-   - Use a queue to track the vertices for traversal.
-   - Mark the starting vertex as visited and enqueue it.
-   - Dequeue a vertex, process it, and enqueue all its adjacent unvisited vertices while marking them as visited.
+Step 2 : Create a helper function topologicalSortUtil(v, visited, stack) to:
 
-3. **Input**:
-   - The user provides the starting vertex for the BFS traversal.
+a) Mark the current vertex v as visited.
 
-4. **Perform BFS traversal**:
-   - Start from the given source vertex and traverse all reachable vertices using BFS.
-   - Print the vertices in the BFS order.
+b) Recursively call the function for all adjacent (unvisited) vertices.
 
-5. **End the program**:
-   - The program outputs the order of vertices visited during the BFS traversal.
+c) Push the vertex to a stack after visiting its neighbors.
 
----
+Step 3 : In the main function:
 
-## Program
+a) Initialize a visited list and an empty stack.
+
+b) Call the helper function for every vertex that hasn't been visited.
+
+c) Once done, reverse and print the stack as the topological sort result.
+
+## PROGRAM :
 
 ```
+# A Python3 program to print topological sorting of a DAG
+def addEdge(u, v):
+	global adj
+	adj[u].append(v)
 
+# The function to do DFS() and stores departure time
+# of all vertex
+def DFS(v):
+	global visited, departure, time
+	visited[v] = 1
+	for i in adj[v]:
+		if visited[i] == 0:
+			DFS(i)
+	departure[time] = v
+	time += 1
+
+# The function to do Topological Sort. It uses DFS().
+def topologicalSort():
+    for i in range(V):
+        if (visited[i]==0):
+            DFS(i)
+    for i in range(V-1,-1,-1):
+        print(departure[i],end=" ")
+
+# Driver code
+if __name__ == '__main__':
+
+	# Create a graph given in the above diagram
+	V,time, adj, visited, departure = 6, 0, [[] for i in range(7)], [0 for i in range(7)],[-1 for i in range(7)]
+	addEdge(5, 2)
+	addEdge(5, 0)
+	addEdge(4, 0)
+	addEdge(4, 1)
+	addEdge(2, 3)
+	addEdge(3, 1)
+
+	print("Topological Sort of the given graph is")
+	topologicalSort()
 ```
 
-## OUTPUT
+## OUTPUT :
 
+![image](https://github.com/user-attachments/assets/3e236828-719b-49fa-9a2b-a9db0e8c87c7)
 
-## RESULT
+## RESULT :
+
+Thus the program to perform topological sorting of a Directed Acyclic Graph (DAG)was successfully executed.
