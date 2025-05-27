@@ -1,37 +1,93 @@
-# Experiment 11(a): Representation of Graph
+# Exp No: 21
+# Representation of Graph
 
-## Aim
-To write a Python program to generate a graph for a given fixed degree sequence.
+## AIM :
 
----
+To write a Python program to perform Depth First Search (DFS) traversal from a given source vertex using a helper function DFSUtil.
 
-## Algorithm
+## ALGORITHM:
 
-1. **Start the program**:
-   - Read the degree sequence from the user input.
-   - The degree sequence represents the number of edges connected to each vertex in the graph.
-   
-2. **Define the graph representation**:
-   - Create an adjacency matrix to represent the graph. The matrix will be a square matrix where each element `mat[i][j]` is `1` if there's an edge between vertex `i` and vertex `j`, and `0` otherwise.
+Step 1 : Define a graph using an adjacency list (dictionary format).
 
-3. **Construct the graph**:
-   - Loop through all pairs of vertices (`i`, `j`).
-   - If both vertices `i` and `j` have remaining degrees greater than `0`, decrement their degree and add an edge between them in the matrix.
+Step 2 : Create a helper function DFSUtil(v, visited, graph):
 
-4. **Display the adjacency matrix**:
-   - Print the adjacency matrix in a human-readable format.
-   
-5. **End the program**:
-   - The graph is now represented by the adjacency matrix, and the program prints the matrix.
+a) Mark the current node as visited.
 
----
+b) Print the current node.
 
-## Program
+c) Recursively call DFSUtil for all adjacent nodes that are not yet visited.
+
+Step 3: In the main function:
+
+a) Initialize a visited list to keep track of visited vertices.
+
+b) Get the starting vertex as input from the user.
+
+c) Call DFSUtil with the source vertex and graph.
+
+Step 4 : Display the order of visited vertices during the DFS traversal.
+
+## PROGRAM:
 
 ```
+from collections import defaultdict
 
+
+
+class Graph:
+
+	# Constructor
+	def __init__(self):
+
+		# default dictionary to store graph
+		self.graph = defaultdict(list)
+
+	# function to add an edge to graph
+	def addEdge(self, u, v):
+		self.graph[u].append(v)
+
+	# A function used by DFS
+	def DFSUtil(self, v, visited):
+
+		# Mark the current node as visited
+		# and print it
+		visited.add(v)
+		print(v,end=' ')
+		for neighbour in self.graph[v]:
+		    if neighbour not in visited:
+		        self.DFSUtil(neighbour, visited)
+		
+		
+	# The function to do DFS traversal. It uses
+	# recursive DFSUtil()
+	def DFS(self, v):
+
+		# Create a set to store visited vertices
+		visited = set()
+
+		# Call the recursive helper function
+		# to print DFS traversal
+		self.DFSUtil(v, visited)
+
+
+n=int(input())
+g = Graph()
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+g.addEdge(2, 3)
+g.addEdge(3, 3)
+
+print("Following is DFS from (starting from vertex {})".format(n))
+g.DFS(n)
 ```
 
-## OUTPUT
+## OUTPUT:
 
-## RESULT
+![image](https://github.com/user-attachments/assets/38d24331-54f9-4ba6-a746-c70eb3eaa6d3)
+
+## RESULT :
+
+Thus the program to perform Depth First Search (DFS) traversal from a given source vertex using a helper function DFSUtil was successfully verified.
+
