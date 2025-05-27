@@ -69,7 +69,6 @@ if __name__ == '__main__':
 ```
 
 ## OUTPUT :
-
 ![image](https://github.com/user-attachments/assets/3e236828-719b-49fa-9a2b-a9db0e8c87c7)
 
 ## RESULT :
